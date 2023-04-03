@@ -112,14 +112,17 @@ class LocationKotlinPlugin(godot: Godot) : GodotPlugin(godot) {
         request.interval = interval.toLong()
         request.maxWaitTime = maxWaitTime.toLong()
         request.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        mFusedLocationClient!!.requestLocationUpdates(request, mLocationCallback, Looper.getMainLooper())
+        mLocationCallback?.let {
+            mFusedLocationClient!!.requestLocationUpdates(request,
+                it, Looper.getMainLooper())
+        }
         Log.d("GODOT", "Location update started.")
     }
 
     fun stopLocationUpdates() {
         if (locationUpdatesStart && mLocationCallback != null) {
             locationUpdatesStart = false
-            mFusedLocationClient!!.removeLocationUpdates(mLocationCallback)
+            mFusedLocationClient!!.removeLocationUpdates(mLocationCallback!!)
             Log.d("GODOT", "Location update stopped.")
         }
     }
