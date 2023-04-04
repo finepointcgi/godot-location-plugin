@@ -6,4 +6,4 @@ binary="LocationPlugin.debug.aar"
 
 [dependencies]
 
-remote=["com.google.android.gms:play-services-location:17.0.0"]
+remote=["com.google.android.gms:play-services-location:21.0.1"]
